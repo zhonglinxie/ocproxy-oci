@@ -22,12 +22,14 @@ if {$url == ""} {
 }
 
 # 开始连接
-spawn openconnect $oc_args --script-tun --script "ocproxy -D 1080 -g" --user $user $url
+# spawn openconnect $oc_args --script-tun --script "ocproxy -D 1080 -g" --user $user $url
+echo $pass | openconnect --passwd-on-stdin -u $user --protocol=pulse \
+ 	--script-tun --script "ocproxy -D 1080 -g" $url
 
 # 期待密码提示
-expect "Password:"
+# expect "Password:"
 # 发送密码
-send "$pass\r"
+# send "$pass\r"
 
 # 检查北大VPN的额外凭据提示
 expect {
